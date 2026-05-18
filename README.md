@@ -24,15 +24,15 @@ REST API для управления задачами с возможностя�
 
 ### Локальный запуск
 
-# 1. Клонировать репозиторий (или перейти в папку проекта)
+## 1. Клонировать репозиторий (или перейти в папку проекта)
 ```bash
 git clone https://github.com/ISHIKHIN/TRSP_KR5
 ```
-# 2. Создать виртуальное окружение
+## 2. Создать виртуальное окружение
 ```bash
 python -m venv .venv
 ```
-# 3. Активировать виртуальное окружение
+## 3. Активировать виртуальное окружение
 ```bash
 # Windows:
 .venv\Scripts\activate
@@ -40,26 +40,26 @@ python -m venv .venv
 # Linux/Mac:
 source .venv/bin/activate
 ```
-# 4. Установить зависимости
+## 4. Установить зависимости
 ```bash
 pip install -r requirements.txt
 ```
-# 5. Запустить приложение
+## 5. Запустить приложение
 ```bash
 uvicorn app.main:app --reload
 ```
-# 6. Запуск тестов
+## 6. Запуск тестов
 ```bash
 pytest -v
 ```
-# 7. Открыть в браузере
+## 7. Открыть в браузере
 ### Swagger документация: http://localhost:8000/docs
 ### ReDoc документация: http://localhost:8000/redoc
 
-# Открыть test_websocket.html с запущенным проектом:
-### test_websocket.html: Попробовать WebSocket чат с визуализацией
-### Пример использования: 
+## Открыть test_websocket.html с запущенным проектом:
+test_websocket.html: Попробовать WebSocket чат с визуализацией
+Пример использования: 
 ![img.png](images/room_test1.png)
 
-# Запуск тестов приложения и вывод результата:
+## Запуск тестов приложения и вывод результата:
 ![img.png](images/pytest.png)
