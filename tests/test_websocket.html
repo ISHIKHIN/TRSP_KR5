@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Chat Test</title>
+</head>
+<body>
+    <h2>WebSocket Chat</h2>
+    <div>
+        <input type="text" id="username" placeholder="Username" value="Your Name">
+        <input type="text" id="room" placeholder="Room" value="Room1">
+        <button onclick="connect()">Connect</button>
+    </div>
+    <div id="messages" style="border:1px solid #ccc; height:300px; overflow:auto; margin:10px 0;"></div>
+    <div>
+        <input type="text" id="message" placeholder="Message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+    let ws = null;
+    let currentUsername = '';
+    let currentRoom = '';
+
+    function connect() {
+        // Закрываем старое соединение, если оно есть
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.close();
+        }
+
+        const username = document.getElementById('username').value;
+        const room = document.getElementById('room').value;
+        currentUsername = username;
+        currentRoom = room;
+
+        ws = new WebSocket(`ws://localhost:8000/ws/rooms/${room}?username=${username}`);
+
+        ws.onopen = () => {
+            addMessage('System', `Connected to room: ${room}`);
+        };
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const sender = data.username || 'System';
+            const text = data.text || data.message || JSON.stringify(data);
+
+            // Показываем все сообщения
+            addMessage(sender, text);
+        };
+
+        ws.onclose = () => {
+            addMessage('System', `Disconnected from room: ${currentRoom}`);
+        };
+    }
+
+    function sendMessage() {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            const message = document.getElementById('message').value;
+            if (message.trim()) {
+                ws.send(JSON.stringify({type: 'message', text: message}));
+                document.getElementById('message').value = '';
+            }
+        } else {
+            addMessage('System', 'Not connected to any room');
+        }
+    }
+
+    function addMessage(sender, text) {
+        const messages = document.getElementById('messages');
+        messages.innerHTML += `<div><strong>${sender}:</strong> ${text}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+    }
+    </script>
+</body>
+</html>
