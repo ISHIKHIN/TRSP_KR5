@@ -52,14 +52,14 @@ uvicorn app.main:app --reload
 ```bash
 pytest -v
 ```
-# 7. Открыть в браузере
+## 7. Открыть в браузере
 ### Swagger документация: http://localhost:8000/docs
 ### ReDoc документация: http://localhost:8000/redoc
 
-# Открыть test_websocket.html с запущенным проектом:
-### test_websocket.html: Попробовать WebSocket чат с визуализацией
-### Пример использования: 
+## Открыть test_websocket.html с запущенным проектом:
+test_websocket.html: Попробовать WebSocket чат с визуализацией
+Пример использования: 
 ![img.png](images/room_test1.png)
 
-# Запуск тестов приложения и вывод результата:
+## Запуск тестов приложения и вывод результата:
 ![img.png](images/pytest.png)
