@@ -62,7 +62,8 @@ async def websocket_room(
 
 @app.get("/health")
 async def health_check():
-    return {"status": "ok"}
+    return {"status": "ok",
+            "env": "docker"}
 
 
 @app.get("/rooms/{room_id}/users")
